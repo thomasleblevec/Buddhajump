@@ -16,6 +16,8 @@ public class Jumper : MonoBehaviour
     private float coeffSlowDown,gmin,gmax, impulseAttenuation, grav;
 
     private float TouchTime;
+    private Touch theTouch;
+    private Vector2 touchStartPosition, touchEndPosition;
 
     void Start()
     {
@@ -30,8 +32,7 @@ public class Jumper : MonoBehaviour
         gmax = 0f;
         coeffSlowDown = (gmax - gmin) / 300;
 
-        //cam = GetComponent<Camera>();
-
+        
     }
 
     public float Get_Gravity()
@@ -42,19 +43,29 @@ public class Jumper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Time.timeScale = gmax + coeffSlowDown*transform.position.y;
-
-        //Debug.Log(Camera.main.WorldToViewportPoint(transform.position).x);
         dirX = 0;
 
 
         if (Input.touchCount > 0)
         {
-            if (Camera.main.WorldToViewportPoint(Input.GetTouch(0).deltaPosition).x > 0.5)
-                {
-                    dirX += -0.1f;
-                }
-                else { dirX += 0.1f; }
+            theTouch = Input.GetTouch(0);
+
+            if(theTouch.phase == TouchPhase.Began)
+            {
+                touchStartPosition = theTouch.position;
+            }
+
+            else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended)
+            {
+                touchEndPosition = theTouch.position;
+                dirX = (touchEndPosition.x - touchStartPosition.x)*0.0003f;
+            }
+
+            //if (Camera.main.WorldToViewportPoint(Input.GetTouch(0).deltaPosition).x > 0.5)
+                //{
+                //    dirX += -0.1f;
+                //}
+                //else { dirX += 0.1f; }
                 
         }
 
@@ -93,12 +104,4 @@ public class Jumper : MonoBehaviour
 
     }
 
-    //void LateUpdate()
-    //{
-
-    //    Vector3 viewPos = transform.position;
-    //    viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
-    //    viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
-    //    transform.position = viewPos;
-    //}
 }
