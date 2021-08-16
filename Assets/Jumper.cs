@@ -25,7 +25,7 @@ public class Jumper : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         moveSpeed = 1f;
         gmin = -3f;
-        verticalSpeedInit =8.5f* (float)Math.Sqrt(gmin / -10f); // values chosen so that the ball jumps at right distance
+        verticalSpeedInit =13.5f* (float)Math.Sqrt(gmin / -10f); // values chosen so that the ball jumps at right distance
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         objectWidth = transform.GetComponent<Renderer>().bounds.extents.x; //extents = size of width / 2
         objectHeight = transform.GetComponent<Renderer>().bounds.extents.y; //extents = size of height / 2

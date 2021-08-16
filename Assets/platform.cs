@@ -50,8 +50,8 @@ public class platform : MonoBehaviour
             }
             else { offset = -1; }
             previous += rand+offset*sizeplat/2;
-            point.localPosition = Vector3.up *i*3 + new Vector3(previous,0,0);
-            pointFalse.localPosition = Vector3.up * i * 3 + new Vector3(previous-2*(rand+offset*sizeplat/2), 0, 0);
+            point.localPosition = Vector3.up *i*8 + new Vector3(previous,0,0);
+            pointFalse.localPosition = Vector3.up * i * 8 + new Vector3(previous-2*(rand+offset*sizeplat/2), 0, 0);
             point.SetParent(transform,false);
             pointFalse.SetParent(transform, false);
             point.GetChild(0).gameObject.GetComponent<TextMesh>().text = reader.ReadLine();
