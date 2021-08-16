@@ -55,21 +55,16 @@ public class Jumper : MonoBehaviour
                 touchStartPosition = theTouch.position;
             }
 
-            else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended)
+            else if ((theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended) && theTouch.deltaTime<0.1)
             {
                 touchEndPosition = theTouch.position;
                 dirX = (touchEndPosition.x - touchStartPosition.x)*0.0003f;
             }
 
-            //if (Camera.main.WorldToViewportPoint(Input.GetTouch(0).deltaPosition).x > 0.5)
-                //{
-                //    dirX += -0.1f;
-                //}
-                //else { dirX += 0.1f; }
                 
         }
 
-        dirX += Input.GetAxis("Horizontal") * moveSpeed; //for computer
+        dirX += Input.GetAxis("Horizontal") * moveSpeed*(float)0.1; //for computer
         //dirX = -Input.acceleration.y * moveSpeed;
 
         if (onPlatform)
